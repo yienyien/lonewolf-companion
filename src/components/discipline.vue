@@ -42,7 +42,10 @@ const Component = Vue.extend({
     },
     db: function() {
       this.db.child('disciplines').once('value').then((snap) => {
-        this.disciplines = snap.val();
+        const disciplines = snap.val();
+        if (disciplines) {
+          this.disciplines = disciplines;
+        }
       });
     }
   }

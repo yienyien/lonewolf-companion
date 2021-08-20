@@ -66,8 +66,9 @@ function resolution(ratio, dice) {
   return wounds;
 }
 
+
 const Component = Vue.extend({
-  props: [ "combatSkill", "endurance" ],
+  props: [ "db", "combatSkill", "endurance" ],
   
   data() {
     return {
@@ -87,8 +88,35 @@ const Component = Vue.extend({
       this.enemyEndurance -= enemyWounds;
       this.wounds += wounds;
       this.$emit('input', this.wounds);
-    }
+    },
   },
+
+  watch: {
+    diceValue: function(v) {
+      this.db.update({"combat/diceValue": v});
+    },
+    enemySkill: function(v) {
+      this.db.update({"combat/enemySkill": v});
+    },
+    enemyEndurance: function(v) {
+      this.db.update({"combat/enemyEndurance": v});
+    },
+    wounds: function(v) {
+      this.db.update({"combat/wounds": v});
+    },
+
+    db: function(newdb) {
+      newdb.child('combat').once('value').then((snap) => {
+        const combat = snap.val();
+        if (combat) {
+          this.diceValue = combat.diceValue || 0;
+          this.enemySkill = combat.enemySkill || 0;
+          this.enemyEndurance = combat.enemyEndurance || 0;
+          this.wounds = combat.wounds || 0;
+        }
+      });
+    }
+  }
 });
 
 export default Component;

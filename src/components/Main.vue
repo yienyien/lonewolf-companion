@@ -10,7 +10,7 @@
     </div>
     <div>
     </div>
-    <Combat :uid="db" :combatSkill="attributes[0]" :endurance="attributes[1]" v-model="wounds"/>
+    <Combat :db="db" :combatSkill="attributes[0]" :endurance="attributes[1]" v-model="wounds"/>
   </div>    
 </template>
 
@@ -64,6 +64,19 @@ const Main = Vue.extend({
   
   methods: {
     hello: function() {
+    }
+  },
+
+  watch: {
+    wounds: function(w) {
+      this.db.child('wounds').set(w);
+    },
+    db: function(newdb) {
+      if (!newdb) return;
+      newdb.child('wounds').once('value').then((snap) => {
+        const wounds = snap.val();
+        this.wounds = wounds || 0;
+      });
     }
   }
 });

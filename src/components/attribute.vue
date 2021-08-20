@@ -15,7 +15,7 @@
 import Vue from "vue";
 
 const Component = Vue.extend({
-  props: ["wounds"],
+  props: ["wounds", "db"],
   
   data() {
     return {
@@ -25,9 +25,25 @@ const Component = Vue.extend({
   },
   methods: {
     change: function() {
-      console.log(this.combatSkill);
-      console.log(this.endurance);
       this.$emit('input', [this.combatSkill, this.endurance]);
+    }
+  },
+  watch: {
+    combatSkill: function(v) {
+      this.db.child('attributes').child('combatSkill').set(v);
+    },
+    endurance: function(v) {
+      this.db.child('attributes').child('endurance').set(v);
+    },
+    db: function(newdb) {
+      newdb.child('attributes').once('value').then((snap) => {
+        const attributes = snap.val();
+        if (attributes) {
+          this.combatSkill = attributes.combatSkill || 0;
+          this.endurance = attributes.endurance || 0;
+          this.change();
+        }
+      });
     }
   }
   

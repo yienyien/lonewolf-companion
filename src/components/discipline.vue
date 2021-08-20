@@ -40,8 +40,8 @@ const Component = Vue.extend({
     disciplines: function() {
       this.db.child('disciplines').set(this.disciplines);
     },
-    db: function() {
-      this.db.child('disciplines').once('value').then((snap) => {
+    db: function(newdb) {
+      newdb.child('disciplines').once('value').then((snap) => {
         const disciplines = snap.val();
         if (disciplines) {
           this.disciplines = disciplines;

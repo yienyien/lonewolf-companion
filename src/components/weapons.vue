@@ -1,33 +1,43 @@
 <template>
-<div>
-  <h1>Armes</h1>
-  <textarea class="backpack-text" v-model="weapons">
-  </textarea>
-</div>
+<div >
+  <div v-for="index in 2" :key="index" class="backpack">
+    <input type="text" v-model.lazy="weapons[index]"/>
+    <select v-model="propositions[index]">
+        <option value="Poignard">Poignard</option>
+        <option value="Lance">Lance</option>        
+        <option value="Masse d'armes">Masse d'armes</option>        
+        <option value="Sabre">Sabre</option>        
+        <option value="Marteau de guerre">Marteau de guerre</option>        
+        <option value="Epée">Epée</option>        
+        <option value="Hache">Hache</option>        
+        <option value="Baton">Baton</option>
+        <option value="Glaive">Glaive</option>         
+    </select>
+  </div>  
+</div>  
 </template>
 
 <script>
 import Vue from "vue";
+import { mapStates } from "./utils.js";
 
 const Component = Vue.extend({
-  props: ["db"],
-
   data() {
     return {
-      weapons: "",
+      propositions: [null, null],
     }
   },
 
+  computed: mapStates("weapons"),
+
   watch: {
-    weapons: function(v) {
-      this.db.child('weapons').set(v);
+    weapons: function(data) {
+      const i = data.findIndex((e) => e);
+      if (i > 0) {
+        this.selection[i] = data[i];
+        this.weapons[i] = null;
+      }
     },
-    db: function(newdb) {
-      newdb.child('weapons').once('value').then((snap) => {
-        const txt = snap.val();
-        this.weapons = txt || "";
-      });
-    }
   }  
 });
 

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Combat</h1>
     <div class="live">
       <div class="dice" v-on:click="random">
         {{ diceValue }}
@@ -9,14 +8,14 @@
         <div class="live-endurance-value">
           {{ endurance - wounds }}
         </div>
-        <div>>
-          <button type="button" v-on:click="wounds -=1">+</button>
-          <button type="button" v-on:click="wounds +=1">-</button>
+        <div>
+          <button type="button" v-on:click="addWounds(-1)">+</button>
+          <button type="button" v-on:click="addWounds(+1)">-</button>
         </div>
       </div>
     </div>
     <div class="combat-sheet">
-      <h2>PLop</h2>
+      <h2></h2>
       <h2>Habileté</h2>
       <h2>Endurance</h2>
       <h2>Quotient</h2>
@@ -30,6 +29,7 @@
 
 <script>
 import Vue from "vue";
+import { mapStates } from "./utils.js";
 
 const t = Infinity;
 
@@ -68,55 +68,28 @@ function resolution(ratio, dice) {
 
 
 const Component = Vue.extend({
-  props: [ "db", "combatSkill", "endurance" ],
-  
-  data() {
-    return {
-      diceValue: 0,
-      enemySkill: 0,
-      enemyEndurance: 0,
-      wounds: 0,
-    }
-  },
+  computed: mapStates("diceValue", "enemySkill", "enemyEndurance", "combatSkill", "wounds", "endurance"),
   
   methods: {
     random: function() {
+      var audio = new Audio('dice.wav'); // path to file
+      audio.play();
+      setTimeout(() => {
+        window.navigator.vibrate(100);
+      }, 300);
+      
       this.diceValue = Math.floor(Math.random() * 10);
+    },
+    addWounds: function(v) {
+      this.$store.commit("addWounds", v);      
     },
     fight: function() {
       const [enemyWounds, wounds] = resolution(this.combatSkill - this.enemySkill, this.diceValue);
       this.enemyEndurance -= enemyWounds;
-      this.wounds += wounds;
-      this.$emit('input', this.wounds);
+      this.addWounds(wounds);
     },
   },
-
-  watch: {
-    diceValue: function(v) {
-      this.db.update({"combat/diceValue": v});
-    },
-    enemySkill: function(v) {
-      this.db.update({"combat/enemySkill": v});
-    },
-    enemyEndurance: function(v) {
-      this.db.update({"combat/enemyEndurance": v});
-    },
-    wounds: function(v) {
-      this.db.update({"combat/wounds": v});
-    },
-
-    db: function(newdb) {
-      newdb.child('combat').once('value').then((snap) => {
-        const combat = snap.val();
-        if (combat) {
-          this.diceValue = combat.diceValue || 0;
-          this.enemySkill = combat.enemySkill || 0;
-          this.enemyEndurance = combat.enemyEndurance || 0;
-          this.wounds = combat.wounds || 0;
-        }
-      });
-    }
-  }
+  
 });
 
 export default Component;
@@ -167,5 +140,9 @@ export default Component;
     text-align: center;
     font-size: 6em;
     line-height: 40px;    
+}
+
+button {
+    height: 100%;
 }
 </style>

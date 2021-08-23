@@ -1,17 +1,35 @@
 <template>
-  <div>
-    <div class="container">
-      <Discipline :db="db"/>
-      <Weapons :db="db"/>
-      <Backpack :db="db"/>
-      <Special :db="db"/>
-      <Pouch :db="db"/>
-      <Attribute v-model="attributes" :wounds="wounds" :db="db"/>
-    </div>
+<div class="container">
+  <Section title="Disciplines Kaï">
+    <Discipline/>
+  </Section>
+  <Section title="Armes">
+    <Weapons/>
+  </Section>
+  <Section title="Sac à dos">
+    <Backpack/>
+  </Section>
+  <Section title="Objets spéciaux">
+    <Special/>
+  </Section>
+  <Section title="Bourse">
+    <Pouch/>
+  </Section>
+  <Section title="Attributs">
+    <Attribute/>
+  </Section>
+  <Section title="Combats">
+    <Combat/>
+  </Section>
+  <Section title="Notes & Sauvegarde">
+    <Backup/>
+  </Section>
+  <Section title="Debug">
     <div>
+      <div>Wake lock: {{wakelock}}</div>
     </div>
-    <Combat :db="db" :combatSkill="attributes[0]" :endurance="attributes[1]" v-model="wounds"/>
-  </div>    
+  </Section>
+</div>    
 </template>
 
 <script>
@@ -28,28 +46,30 @@ import Pouch from "./pouch.vue";
 import Attribute from "./attribute.vue";
 import Combat from "./combat.vue";
 import { v4 as uuidv4 } from 'uuid';
+import Section from "./Section.vue";
+import Backup from "./Backup.vue";
 
 const Main = Vue.extend({
-  data() {
-    return {
-      attributes: [0, 0],
-      wounds: 0,
-      uid: 0,
-      db: null,
-    };
-  },
-
   components: {
+    Section,
     Discipline,
     Weapons,
     Backpack,
     Special,
     Pouch,
     Attribute,
-    Combat
+    Combat,
+    Backup,
+  },
+
+  data() {
+    return {
+      wakelock: null,
+      truc: "hello",
+    }
   },
   
-  mounted() {
+  async mounted() {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
     if ('uid' in params) {
@@ -59,26 +79,20 @@ const Main = Vue.extend({
       window.location = window.location + "?uid=" + uid;      
     }
     const db = firebase.database();
-    this.db = db.ref('users/' + this.uid);
+    this.$store.commit("db", db.ref('users/' + this.uid));
+    this.$store.dispatch("load");
+
+    try {
+      await navigator.wakeLock.request('screen');
+
+      this.wakelock = "OK";
+    } catch (err) {
+      // The Wake Lock request has failed - usually system related, such as battery.
+      this.wakelock = "KO";
+    }
+    
   },
   
-  methods: {
-    hello: function() {
-    }
-  },
-
-  watch: {
-    wounds: function(w) {
-      this.db.child('wounds').set(w);
-    },
-    db: function(newdb) {
-      if (!newdb) return;
-      newdb.child('wounds').once('value').then((snap) => {
-        const wounds = snap.val();
-        this.wounds = wounds || 0;
-      });
-    }
-  }
 });
 
 export default Main;
@@ -90,9 +104,11 @@ body {
 }
   
 .container {
+    /*
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 5px;
     grid-auto-rows: minmax(100px, auto);
+   */
 }
 </style>

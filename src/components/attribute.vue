@@ -2,51 +2,23 @@
 <div class="attributes">
   <div class="attribute">
     <h2 >Habileté</h2>
-    <input type="number" v-model.number="combatSkill" v-on:change="change"/>
+    <input type="number" v-model.number="combatSkill"/>
   </div>
   <div class="attribute">
     <h2 >Endurance</h2>
-    <input type="number" v-model.number="endurance" v-on:change="change"/>
+    <input type="number" v-model.number="endurance"/>
   </div>
 </div>
 </template>
 
 <script>
 import Vue from "vue";
+import { mapStates } from "./utils.js";
 
 const Component = Vue.extend({
-  props: ["wounds", "db"],
-  
-  data() {
-    return {
-      combatSkill: 0,
-      endurance: 0
-    }
-  },
-  methods: {
-    change: function() {
-      this.$emit('input', [this.combatSkill, this.endurance]);
-    }
-  },
-  watch: {
-    combatSkill: function(v) {
-      this.db.child('attributes').child('combatSkill').set(v);
-    },
-    endurance: function(v) {
-      this.db.child('attributes').child('endurance').set(v);
-    },
-    db: function(newdb) {
-      newdb.child('attributes').once('value').then((snap) => {
-        const attributes = snap.val();
-        if (attributes) {
-          this.combatSkill = attributes.combatSkill || 0;
-          this.endurance = attributes.endurance || 0;
-          this.change();
-        }
-      });
-    }
-  }
-  
+
+  computed: mapStates("combatSkill", "endurance"),
+    
 });
 
 export default Component;

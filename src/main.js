@@ -1,5 +1,8 @@
 import Vue from "vue";
+import Vuex from "vuex";
+
 import App from "./App.vue";
+import newStore from "./store.js";
 
 import firebase from "firebase/app";
 
@@ -18,6 +21,9 @@ firebase.initializeApp(firebaseConfig);
 
 Vue.config.productionTip = false;
 
+Vue.use(Vuex);
+
 new Vue({
   render: (h) => h(App),
+  store: newStore,
 }).$mount("#app");

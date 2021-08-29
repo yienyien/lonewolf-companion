@@ -1,6 +1,7 @@
 <template>
 <div >
-  <div v-for="index in 2" :key="index" class="backpack">
+  <div v-for="index in 2" :key="index" class="list">
+    <span class="index">{{index}}</span>
     <input type="text" v-model.lazy="weapons[index]"/>
     <select v-model="propositions[index]">
         <option value="Poignard">Poignard</option>
@@ -45,4 +46,6 @@ export default Component;
 </script>
 
 <style>
+
+
 </style>

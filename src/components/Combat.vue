@@ -1,16 +1,19 @@
 <template>
   <div>
     <div class="live">
-      <div class="dice" v-on:click="random">
-        {{ diceValue }}
+      <div class="dice-container" v-on:click="random">
+        <div class="dice">
+          {{ diceValue }}
+        </div>
       </div>
       <div class="live-endurance">
+        <img class="live-endurance-icon" src="life.png"/>
         <div class="live-endurance-value">
           {{ endurance - wounds }}
         </div>
         <div>
-          <button type="button" v-on:click="addWounds(-1)">+</button>
-          <button type="button" v-on:click="addWounds(+1)">-</button>
+          <button class="wound-modificator" type="button" v-on:click="addWounds(-1)">+</button>
+          <button class="wound-modificator" type="button" v-on:click="addWounds(+1)">-</button>
         </div>
       </div>
     </div>
@@ -22,7 +25,7 @@
       <button type="button" v-on:click="fight">Appliquer</button>
       <input type="number" v-model.number="enemySkill"/>
       <input type="number" v-model.number="enemyEndurance"/>
-      <input type="number" readonly :value="combatSkill - enemySkill"/>      
+      <input type="number" readonly :value="combatSkill - enemySkill"/>
     </div>
   </div>
 </template>
@@ -48,7 +51,7 @@ const woundsTable = [
   [[8, 3], [9, 3], [10, 2], [11, 2], [12, 2], [14, 1], [16, 0], [18, 0], [t, 0], [t, 0]],
   [[9, 3], [10, 2], [11, 2], [12, 2], [14, 1], [16, 1], [18, 0], [t, 0], [t, 0], [t, 0]]
 ];
-    
+
 
 function resolution(ratio, dice) {
   if (ratio < -11) ratio = -11;
@@ -59,17 +62,17 @@ function resolution(ratio, dice) {
 
   dice = (dice -1)
   if (dice < 0) dice = 9;
-  
+
   const wounds = woundsTable[ratio][dice]
 
-  
+
   return wounds;
 }
 
 
 const Component = Vue.extend({
   computed: mapStates("diceValue", "enemySkill", "enemyEndurance", "combatSkill", "wounds", "endurance"),
-  
+
   methods: {
     random: function() {
       var audio = new Audio('dice.wav'); // path to file
@@ -77,11 +80,11 @@ const Component = Vue.extend({
       setTimeout(() => {
         window.navigator.vibrate(100);
       }, 300);
-      
+
       this.diceValue = Math.floor(Math.random() * 10);
     },
     addWounds: function(v) {
-      this.$store.commit("addWounds", v);      
+      this.$store.commit("addWounds", v);
     },
     fight: function() {
       const [enemyWounds, wounds] = resolution(this.combatSkill - this.enemySkill, this.diceValue);
@@ -89,17 +92,24 @@ const Component = Vue.extend({
       this.addWounds(wounds);
     },
   },
-  
+
 });
 
 export default Component;
 </script>
 
 <style>
+.dice-container {
+    padding-left: calc(50% - 20px);
+}
+
 .dice {
-    width: 100%;
+    width: 40px;
     height: 40px;
     background-color: WhiteSmoke;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 10px;
     text-align: center;
     line-height: 40px;
     font-size: 6em;
@@ -118,31 +128,41 @@ export default Component;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 5px;
-    grid-auto-rows: minmax(15px, auto);    
+    grid-auto-rows: minmax(15px, auto);
 }
 
 .live {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 0px;
-    grid-auto-rows: minmax(15px, auto);        
+    grid-auto-rows: minmax(15px, auto);
 }
+
 
 .live-endurance {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 40px 40px 1fr;
     grid-gap: 0px;
-    grid-auto-rows: minmax(15px, auto);        
+    grid-auto-rows: minmax(15px, auto);
 }
+
+.live-endurance-icon {
+    padding-top: calc(50% - 10px);
+    width: 40px;
+    height: 40px;
+}
+
 
 .live-endurance-value {
-    height: 40px;    
+    height: 40px;
     text-align: center;
+    padding: 10px;
     font-size: 6em;
-    line-height: 40px;    
+    line-height: 40px;
 }
 
-button {
+.wound-modificator {
+    width: 50%;
     height: 100%;
 }
 </style>

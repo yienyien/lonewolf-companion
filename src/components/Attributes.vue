@@ -26,19 +26,11 @@ export default Component;
 
 <style>
 
-.endurance input {
-   outline: none;
-   border: 0;
-   width: 30px;
-   height: 50px;
-   font-size: 20px;  
-}
-
 .attribute input {
     outline: none;
     border: 0;
     width: 30px;
-    height: 50px;
+    height: 40px;
     font-size: 20px;
 }
 
@@ -54,6 +46,6 @@ export default Component;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 5px;
-    grid-auto-rows: minmax(50px, auto);
+    grid-auto-rows: minmax(40px, auto);
 }
 </style>

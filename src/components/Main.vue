@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <Section title="Disciplines Kaï">
-    <Discipline/>
+    <Disciplines/>
   </Section>
   <Section title="Armes">
     <Weapons/>
@@ -16,7 +16,7 @@
     <Pouch/>
   </Section>
   <Section title="Attributs">
-    <Attribute/>
+    <Attributes/>
   </Section>
   <Section title="Combats">
     <Combat/>
@@ -24,10 +24,8 @@
   <Section title="Notes & Sauvegarde">
     <Backup/>
   </Section>
-  <Section title="Debug">
-    <div>
-      <div>Wake lock: {{wakelock}}</div>
-    </div>
+  <Section title="Options">
+    <Settings/>
   </Section>
 </div>    
 </template>
@@ -38,33 +36,34 @@ import Vue from "vue";
 import firebase from 'firebase/app'
 import "firebase/database";
 
-import Discipline from "./Disciplines.vue";
+import Disciplines from "./Disciplines.vue";
 import Weapons from "./Weapons.vue";
 import Backpack from "./Backpack.vue";
 import Special from "./Special.vue";
 import Pouch from "./Pouch.vue";
-import Attribute from "./Attributes.vue";
+import Attributes from "./Attributes.vue";
 import Combat from "./Combat.vue";
 import { v4 as uuidv4 } from 'uuid';
 import Section from "./Section.vue";
 import Backup from "./Backup.vue";
+import Settings from "./Settings.vue";
 
 const Main = Vue.extend({
   components: {
     Section,
-    Discipline,
+    Disciplines,
     Weapons,
     Backpack,
     Special,
     Pouch,
-    Attribute,
+    Attributes,
     Combat,
     Backup,
+    Settings,
   },
 
   data() {
     return {
-      wakelock: null,
       truc: "hello",
     }
   },
@@ -81,16 +80,6 @@ const Main = Vue.extend({
     const db = firebase.database();
     this.$store.commit("db", db.ref('users/' + this.uid));
     this.$store.dispatch("load");
-
-    try {
-      await navigator.wakeLock.request('screen');
-
-      this.wakelock = "OK";
-    } catch (err) {
-      // The Wake Lock request has failed - usually system related, such as battery.
-      this.wakelock = "KO";
-    }
-    
   },
   
 });
@@ -111,4 +100,29 @@ body {
     grid-auto-rows: minmax(100px, auto);
    */
 }
+
+.list {
+    display: grid;
+    grid-template-columns: 10px auto 20px;
+    grid-gap: 5px;
+    grid-auto-rows: auto;
+}
+
+
+.index {
+    padding-top: 5px;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.w50 {
+    width: 50%;
+}
+
+.w80 {
+    width: 80%;
+}
+
 </style>

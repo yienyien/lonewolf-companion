@@ -1,5 +1,4 @@
 function mapState(state) {
-  console.log(state);
   return {
     get() {
       return this.$store.state[state];

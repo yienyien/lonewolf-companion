@@ -1,6 +1,7 @@
 <template>
 <div >
-  <div v-for="index in 8" :key="index" class="backpack">
+  <div v-for="index in 8" :key="index" class="list">
+    <span class="index">{{index}}</span>
     <input type="text" v-model.lazy="backpack[index]"/>
     <select v-model="items[index]">
       <option value="1 repas">1 repas</option>
@@ -41,11 +42,5 @@ export default Component;
 </script>
 
 <style>
-  .backpack {
-    display: grid;
-    grid-template-columns: auto 20px;
-    grid-gap: 5px;
-    grid-auto-rows: auto;
- 
-  }
+
 </style>

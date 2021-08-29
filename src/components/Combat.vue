@@ -2,12 +2,12 @@
   <div>
     <div class="live">
       <div class="dice-container" v-on:click="random">
-        <div class="dice">
+        <div class="dice" v-bind:class="roll">
           {{ diceValue }}
         </div>
       </div>
       <div class="live-endurance">
-        <img class="live-endurance-icon" src="life.png"/>
+        <div><img class="live-endurance-icon" src="life.png" v-bind:class="beat"/></div>
         <div class="live-endurance-value">
           {{ endurance - wounds }}
         </div>
@@ -71,20 +71,33 @@ function resolution(ratio, dice) {
 
 
 const Component = Vue.extend({
+  data() {
+    return {
+      roll: false,
+      beat: false,
+    }
+  },
+
   computed: mapStates("diceValue", "enemySkill", "enemyEndurance", "combatSkill", "wounds", "endurance"),
 
   methods: {
     random: function() {
       var audio = new Audio('dice.wav'); // path to file
       audio.play();
+      this.roll = "roll";
       setTimeout(() => {
         window.navigator.vibrate(100);
+        this.roll = false;
+        this.diceValue = Math.floor(Math.random() * 10);
       }, 300);
 
-      this.diceValue = Math.floor(Math.random() * 10);
     },
     addWounds: function(v) {
       this.$store.commit("addWounds", v);
+      this.beat = "beat";
+      setTimeout(() => {
+        this.beat = false;
+      }, 1000);
     },
     fight: function() {
       const [enemyWounds, wounds] = resolution(this.combatSkill - this.enemySkill, this.diceValue);
@@ -101,7 +114,20 @@ export default Component;
 <style>
 .dice-container {
     padding-left: calc(50% - 31px);
-} 
+}
+
+.roll {
+    animation: .1s linear 0s infinite alternate roll;
+}
+
+@keyframes roll { from { margin-left:-15%; } to { margin-left:15%; }  }
+
+.beat {
+    animation: .3s ease-in-out 0s infinite alternate beat;
+}
+
+@keyframes beat { from { padding-left: 15px; padding-top: calc(50% + 5px); width: 10px; height: 10px}  to { padding-left: 0;  padding-top: calc(50% - 10px);  width: 40px; height: 40px}  }
+
 
 .dice {
     width: 40px;

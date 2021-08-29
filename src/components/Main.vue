@@ -134,5 +134,6 @@ html {
     background-image: url("bg.jpg");
     background-size: 100% 120%;
     padding: 30px;
+    background-repeat: no-repeat;
 }
 </style>

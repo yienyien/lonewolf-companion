@@ -32,11 +32,11 @@ const Component = Vue.extend({
   computed: mapStates("weapons"),
 
   watch: {
-    weapons: function(data) {
+    propositions: function(data) {
       const i = data.findIndex((e) => e);
       if (i > 0) {
-        this.selection[i] = data[i];
-        this.weapons[i] = null;
+        this.weapons[i] = data[i];
+        this.propositions[i] = null;
       }
     },
   }  

@@ -125,4 +125,14 @@ body {
     width: 80%;
 }
 
+.monospace{
+    font-family: 'Menlo', 'Lucida Console', 'Monaco', 'Consolas', monospace;
+}
+
+html {
+    /*border: 1px solid;*/
+    background-image: url("bg.jpg");
+    background-size: 100% 120%;
+    padding: 30px;
+}
 </style>

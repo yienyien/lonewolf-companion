@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 v-on:click="fold = !fold">{{title}}</h1>
+    <h1 v-on:click="fold = !fold"><span class="monospace">{{ fold ? "+": "-"}}</span> {{title}}</h1>
     <div v-if="!fold">
       <slot></slot>
     </div>

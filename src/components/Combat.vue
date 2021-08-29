@@ -100,8 +100,8 @@ export default Component;
 
 <style>
 .dice-container {
-    padding-left: calc(50% - 20px);
-}
+    padding-left: calc(50% - 31px);
+} 
 
 .dice {
     width: 40px;
@@ -133,7 +133,7 @@ export default Component;
 
 .live {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 120px 1fr;
     grid-gap: 0px;
     grid-auto-rows: minmax(15px, auto);
 }
@@ -141,7 +141,7 @@ export default Component;
 
 .live-endurance {
     display: grid;
-    grid-template-columns: 40px 40px 1fr;
+    grid-template-columns: 40px 80px 1fr;
     grid-gap: 0px;
     grid-auto-rows: minmax(15px, auto);
 }

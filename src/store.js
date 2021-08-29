@@ -12,7 +12,7 @@ function newStore() {
     db: null,
     combatSkill: 0,
     endurance: 0,
-    disciplines: [],
+    disciplines: [null, null, null, null, null],
     wounds: 0,
     backpack: [],
     diceValue: 0,
@@ -58,9 +58,11 @@ function newStore() {
         if (state.db) {
           state.db.once("value").then((snap) => {
             const val = snap.val();
-            Object.entries(val).forEach(([key, value]) => {
-              commit(key, value, true);
-            });
+            if (val) {
+              Object.entries(val).forEach(([key, value]) => {
+                commit(key, value, true);
+              });
+            }
           });
         }
       },

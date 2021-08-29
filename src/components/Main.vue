@@ -38,13 +38,13 @@ import Vue from "vue";
 import firebase from 'firebase/app'
 import "firebase/database";
 
-import Discipline from "./discipline.vue";
-import Weapons from "./weapons.vue";
-import Backpack from "./backpack.vue";
-import Special from "./special.vue";
-import Pouch from "./pouch.vue";
-import Attribute from "./attribute.vue";
-import Combat from "./combat.vue";
+import Discipline from "./Disciplines.vue";
+import Weapons from "./Weapons.vue";
+import Backpack from "./Backpack.vue";
+import Special from "./Special.vue";
+import Pouch from "./Pouch.vue";
+import Attribute from "./Attributes.vue";
+import Combat from "./Combat.vue";
 import { v4 as uuidv4 } from 'uuid';
 import Section from "./Section.vue";
 import Backup from "./Backup.vue";

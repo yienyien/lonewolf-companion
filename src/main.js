@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import VueResizeObserver from "vue-resize-observer";
 
 import App from "./App.vue";
 import newStore from "./store.js";
@@ -22,6 +23,7 @@ firebase.initializeApp(firebaseConfig);
 Vue.config.productionTip = false;
 
 Vue.use(Vuex);
+Vue.use(VueResizeObserver);
 
 new Vue({
   render: (h) => h(App),

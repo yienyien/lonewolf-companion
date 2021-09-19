@@ -93,12 +93,7 @@ body {
 }
   
 .container {
-    /*
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 5px;
-    grid-auto-rows: minmax(100px, auto);
-   */
+    padding: 20px;
 }
 
 .list {
@@ -131,8 +126,8 @@ body {
 
 html {
     /*border: 1px solid;*/
-    background-image: url("bg.jpg");
-    background-size: 100% 120%;
+    /*background-image: url("bg.jpg");*/
+    /*background-size: 100% 120%;*/
     padding: 30px;
     background-repeat: no-repeat;
 }

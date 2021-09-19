@@ -52,13 +52,25 @@ export default Background;
     min-height: calc(100% - 200px);
 }
 
-
 .xfixed {
     background-size: 100%;
 }
 
 .xstresh {
-    background-size: contain;
+    background-repeat: repeat-x;
+}
+
+
+@media (min-width: 450px) {
+    .xstresh {
+        background-size: contain;
+    }
+}
+
+@media (max-width: 450px) {
+    .xstresh {
+        background-size: cover;
+    }
 }
 
 .bg1 {

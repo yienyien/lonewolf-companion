@@ -34,9 +34,9 @@
 
 <script>
 import Vue from "vue";
-import { mapState } from 'vuex';
+import { mapper } from './utils';
 
-const Component = Vue.extend({
+const Component = Vue.extend(mapper(["disciplines"], {
   data() {
     return {
       ndisciplines: 0,
@@ -44,19 +44,12 @@ const Component = Vue.extend({
   },
 
   computed: {
-    ...mapState(['disciplines']),
     size: function() {
       const s = Math.max(...Object.keys(this.disciplines)) + 1 + this.ndisciplines;
       return s;
     }
   },
-
-  watch: {
-    disciplines: function(v) {
-      this.$store.commit("disciplines", v);
-    },
-  }
-});
+}));
 
 export default Component;
 </script>

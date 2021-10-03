@@ -15,4 +15,26 @@ function mapStates(...states) {
   return Object.fromEntries(mappings);
 }
 
-export { mapState, mapStates };
+function mapper(states, Component) {
+  states.forEach((state) => {
+    if (!Component.computed) {
+      Component.computed = {};
+    }
+    Component.computed[state] = mapState(state);
+
+    if (!Component.watch) {
+      Component.watch = {};
+    }
+    Component.watch[state] = {
+      deep: true,
+      handler(v) {
+        console.log("ici");
+        this.$store.commit(state, v);
+      },
+    };
+  });
+
+  return Component;
+}
+
+export { mapState, mapStates, mapper };

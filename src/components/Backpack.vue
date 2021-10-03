@@ -13,30 +13,26 @@
 
 <script>
 import Vue from "vue";
-import { mapStates } from "./utils.js";
+import { mapper } from "./utils";
 
-const Component = Vue.extend({
+const Component = Vue.extend(mapper(["backpack"], {
   data() {
     return {
       items: [null, null, null, null, null, null, null, null],
     }
   },
 
-  computed: mapStates("backpack"),
-
   watch: {
     items: function(data) {
       const i = data.findIndex((e) => e);
       if (i> 0) {
-        this.backpack[i] = data[i];
-        this.items[i] = null;
-        this.$store.commit("backpack", this.backpack);
+        Vue.set(this.backpack, i, data[i]);
+        Vue.set(this.items, i, null);
       }
     },
   }
 
-  
-});
+}));
 
 export default Component;
 </script>

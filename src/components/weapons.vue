@@ -20,27 +20,26 @@
 
 <script>
 import Vue from "vue";
-import { mapStates } from "./utils.js";
+import { mapper } from "./utils.js";
 
-const Component = Vue.extend({
+const Component = Vue.extend(mapper(["weapons"], {
   data() {
     return {
       propositions: [null, null],
     }
   },
 
-  computed: mapStates("weapons"),
-
   watch: {
     propositions: function(data) {
       const i = data.findIndex((e) => e);
       if (i > 0) {
-        this.weapons[i] = data[i];
-        this.propositions[i] = null;
+        Vue.set(this.weapons, i, data[i]);
+        Vue.set(this.propositions, i, null);
       }
     },
-  }  
-});
+  }
+}));
+
 
 export default Component;
 </script>

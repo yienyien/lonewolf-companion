@@ -4,7 +4,7 @@ function save(state) {
   if (!state.db) return;
   const s = { ...state };
   delete s["db"];
-  state.db.set(s);
+  state.db.update(s);
 }
 
 function newStore() {
@@ -23,6 +23,7 @@ function newStore() {
     weapons: [null, null],
     chapter: 0,
     notes: "",
+    sections: {},
   };
 
   function getSetters() {

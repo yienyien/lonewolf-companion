@@ -1,30 +1,30 @@
 <template>
 <div class="container">
-  <Section title="Disciplines Kaï">
+  <Section title="Disciplines Kaï" name="disciplines">
     <Disciplines/>
   </Section>
-  <Section title="Armes">
+  <Section title="Armes" name="weapons">
     <Weapons/>
   </Section>
-  <Section title="Sac à dos">
+  <Section title="Sac à dos" name="backpack">
     <Backpack/>
   </Section>
-  <Section title="Objets spéciaux">
+  <Section title="Objets spéciaux" name="special">
     <Special/>
   </Section>
-  <Section title="Bourse">
+  <Section title="Bourse" name="pouch">
     <Pouch/>
   </Section>
-  <Section title="Attributs">
+  <Section title="Attributs" name="attributes">
     <Attributes/>
   </Section>
-  <Section title="Combats">
+  <Section title="Combats" name="combat">
     <Combat/>
   </Section>
-  <Section title="Notes & Sauvegarde">
+  <Section title="Notes & Sauvegarde" name="backup">
     <Backup/>
   </Section>
-  <Section title="Options">
+  <Section title="Options" name="options">
     <Settings/>
   </Section>
 </div>    

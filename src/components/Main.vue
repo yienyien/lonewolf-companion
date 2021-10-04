@@ -63,27 +63,12 @@ const Main = Vue.extend({
     const db = firebase.database();
     this.$store.commit("db", db.ref('users/' + this.uid));
     this.$store.dispatch("load");
-
-    // Todo setup
-    this.$i18n.locale="fr";
   },
 
 });
 
 export default Main;
 </script>
-
-<i18n>
-{
-  "en": {
-    "disciplines": "Kaï Force"
-  },
-  "fr": {
-    "disciplines": "Disciplines Kaï"
-  }
-}
-</i18n>
-
 
 <style>
 body {

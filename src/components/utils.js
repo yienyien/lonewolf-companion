@@ -22,14 +22,15 @@ function mapper(states, Component) {
     }
     Component.computed[state] = mapState(state);
 
-    if (!Component.watch) {
-      Component.watch = {};
-    }
-    Component.watch[state] = {
+    const watch = Component.watch || {};
+    let sup = watch[state] && (watch[state].handler || watch[state]);
+
+    watch[state] = {
       deep: true,
       handler(v) {
-        console.log("ici");
         this.$store.commit(state, v);
+        sup = sup && sup.bind(this);
+        sup && sup(v);
       },
     };
   });

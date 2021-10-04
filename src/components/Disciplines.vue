@@ -59,6 +59,17 @@ const Component = Vue.extend(mapper(["disciplines"], {
 export default Component;
 </script>
 
+<i18n>
+{
+  "en": {
+    "disciplines": "Magnakai disciplines"
+  },
+  "fr": {
+    "disciplines": "Disciplines Kaï"
+  }
+}
+</i18n>
+
 <style>
 .discipline {
     width: 100%

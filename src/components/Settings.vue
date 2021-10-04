@@ -1,13 +1,18 @@
 <template>
-  <div>
-    <div>Wake lock: {{wakelock}}</div>
-  </div>
+<Section title="Options" id="options">
+  <div>Wake lock: {{wakelock}}</div>
+</Section>
 </template>
 
 <script>
 import Vue from "vue";
+import Section from "./Section.vue";
 
 const Settings = Vue.extend({
+  components: {
+    Section,
+  },
+
   data() {
     return {
       wakelock: null,

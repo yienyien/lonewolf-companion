@@ -1,17 +1,24 @@
 <template>
-<div class="backup-container">
-  <h2>Chapter:</h2>
-  <h2>Notes</h2>
-  <input class="chapter" type="number" v-model.number="chapter"/>
-  <textarea v-model.lazy="notes"/>
-</div>
+<Section title="Notes & Sauvegarde" id="backup">
+  <div class="backup-container">
+    <h2>Chapter:</h2>
+    <h2>Notes</h2>
+    <input class="chapter" type="number" v-model.number="chapter"/>
+    <textarea v-model.lazy="notes"/>
+  </div>
+</Section>
 </template>
 
 <script>
 import Vue from "vue";
 import { mapStates } from "./utils.js";
+import Section from "./Section.vue";
 
 const Component = Vue.extend({
+  components: {
+    Section,
+  },
+
   computed: mapStates("chapter", "notes"),
 
 });

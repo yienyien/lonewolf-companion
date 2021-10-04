@@ -22,7 +22,7 @@ import Vue from "vue";
 const Background = Vue.extend({
   props: ['height'],
 
-  
+
 });
 
 export default Background;
@@ -39,7 +39,7 @@ export default Background;
 }
 
 .row {
-    display: grid;    
+    display: grid;
     grid-template-columns: 150px 1fr 150px;
 }
 
@@ -90,19 +90,19 @@ export default Background;
 }
 
 .bg6 {
-    background-image: url("ystresh-right2.jpg");    
+    background-image: url("ystresh-right2.jpg");
 }
 
 .bg7 {
-    background-image: url("bottom-left.png");    
+    background-image: url("bottom-left.png");
 }
 
 .bg8 {
-    background-image: url("xstresh-bottom2.jpg");        
+    background-image: url("xstresh-bottom2.jpg");
 }
 
 .bg9 {
     background-image: url("bottom-right.png");
 }
-  
+
 </style>

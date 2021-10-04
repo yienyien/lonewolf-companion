@@ -1,5 +1,5 @@
 <template>
-<div >
+<Section title="Sac à dos" id="backpack">
   <div v-for="index in 8" :key="index" class="list">
     <span class="index">{{index}}</span>
     <input type="text" v-model.lazy="backpack[index]"/>
@@ -7,15 +7,20 @@
       <option value="1 repas">1 repas</option>
       <option value="Poition de guérison">Potion guérison</option>
     </select>
-  </div>  
-</div>
+  </div>
+</Section>
 </template>
 
 <script>
 import Vue from "vue";
 import { mapper } from "./utils";
+import Section from "./Section.vue";
 
 const Component = Vue.extend(mapper(["backpack"], {
+  components: {
+    Section,
+  },
+
   data() {
     return {
       items: [null, null, null, null, null, null, null, null],

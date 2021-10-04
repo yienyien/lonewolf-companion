@@ -1,24 +1,30 @@
 <template>
-<div class="attributes">
-  <div class="attribute">
-    <h2 >Habileté</h2>
-    <input type="number" v-model.number="combatSkill"/>
+<Section title="Attributs" id="attributes">
+  <div class="attributes">
+    <div class="attribute">
+      <h2 >Habileté</h2>
+      <input type="number" v-model.number="combatSkill"/>
+    </div>
+    <div class="attribute">
+      <h2 >Endurance</h2>
+      <input type="number" v-model.number="endurance"/>
+    </div>
   </div>
-  <div class="attribute">
-    <h2 >Endurance</h2>
-    <input type="number" v-model.number="endurance"/>
-  </div>
-</div>
+</Section>
 </template>
 
 <script>
 import Vue from "vue";
 import { mapStates } from "./utils.js";
+import Section from "./Section.vue";
 
 const Component = Vue.extend({
+  components: {
+    Section,
+  },
 
   computed: mapStates("combatSkill", "endurance"),
-    
+
 });
 
 export default Component;
@@ -35,7 +41,7 @@ export default Component;
 }
 
 .attribute div {
-    font-size: 20px;    
+    font-size: 20px;
 }
 
 .attribute {

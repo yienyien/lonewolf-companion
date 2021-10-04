@@ -6,6 +6,7 @@ import App from "./App.vue";
 import newStore from "./store.js";
 
 import firebase from "firebase/app";
+import i18n from './i18n'
 
 const firebaseConfig = {
   apiKey: "AIzaSyB20KqyJblsycEV7LBkQKNFggP8y9ElO8o",
@@ -27,5 +28,6 @@ Vue.use(VueResizeObserver);
 
 new Vue({
   render: (h) => h(App),
-  store: newStore,
+  i18n,
+  store: newStore
 }).$mount("#app");

@@ -1,5 +1,5 @@
 <template>
-<div>
+<Section :title="$t('disciplines')" id="disciplines">
   <div v-for="index in size" :key="index" class="list">
     <span class="index">{{index}}</span>
 
@@ -29,14 +29,19 @@
   <div class="center">
     <button class="w80" type="button" v-on:click="ndisciplines+=1">+</button>
   </div>
-</div>
+</Section>
 </template>
 
 <script>
 import Vue from "vue";
 import { mapper } from './utils';
+import Section from "./Section.vue";
 
 const Component = Vue.extend(mapper(["disciplines"], {
+  components: {
+    Section,
+  },
+
   data() {
     return {
       ndisciplines: 0,

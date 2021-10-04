@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <Section title="Combats" id="combat">
     <div class="live">
       <div class="dice-container" v-on:click="random">
         <div class="dice" v-bind:class="roll">
@@ -27,12 +27,13 @@
       <input type="number" v-model.number="enemyEndurance"/>
       <input type="number" readonly :value="combatSkill - enemySkill"/>
     </div>
-  </div>
+  </Section>
 </template>
 
 <script>
 import Vue from "vue";
 import { mapStates } from "./utils.js";
+import Section from "./Section.vue";
 
 const t = Infinity;
 
@@ -71,6 +72,10 @@ function resolution(ratio, dice) {
 
 
 const Component = Vue.extend({
+  components: {
+    Section,
+  },
+
   data() {
     return {
       roll: false,

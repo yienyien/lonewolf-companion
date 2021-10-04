@@ -24,6 +24,7 @@ function newStore() {
     chapter: 0,
     notes: "",
     sections: {},
+    lang: "en",
   };
 
   function getSetters() {

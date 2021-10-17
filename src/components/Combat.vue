@@ -122,12 +122,12 @@ export default Component;
 {
   "en": {
     "Ratio": "Ratio",
-    "Skill combat": "Skill combat",
+    "Combat skill": "Combat skill",
     "Round": "Fight"
   },
   "fr": {
     "Ratio": "Quotient",
-    "Sill combat": "Habilité",
+    "Combat skill": "Habilité",
     "Round": "Combatre"
   }
 }

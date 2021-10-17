@@ -2,11 +2,11 @@
 <Section title="Attributs" id="attributes">
   <div class="attributes">
     <div class="attribute">
-      <h2 >Habileté</h2>
+      <h2 >{{$t("Combat skill")}}</h2>
       <input type="number" v-model.number="combatSkill"/>
     </div>
     <div class="attribute">
-      <h2 >Endurance</h2>
+      <h2 >{{$t("Endurance")}}</h2>
       <input type="number" v-model.number="endurance"/>
     </div>
   </div>
@@ -29,6 +29,19 @@ const Component = Vue.extend({
 
 export default Component;
 </script>
+
+<i18n>
+{
+  "en": {
+    "Combat skill": "Combat skill",
+    "Endurance": "Endurance"
+  },
+  "fr": {
+    "Combat skill": "Habileté",
+    "Endurance": "Endurance"
+  }
+}
+</i18n>
 
 <style>
 

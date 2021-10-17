@@ -4,8 +4,8 @@
     <span class="index">{{index}}</span>
     <input type="text" v-model.lazy="backpack[index]"/>
     <select v-model="items[index]">
-      <option value="1 repas">1 repas</option>
-      <option value="Poition de guérison">Potion guérison</option>
+      <option :value="$t('1 meal')">{{$t("1 meal")}}</option>
+      <option :value="$t('Heal potion')">{{$t("Heal potion")}}</option>
     </select>
   </div>
 </Section>
@@ -42,6 +42,16 @@ const Component = Vue.extend(mapper(["backpack"], {
 export default Component;
 </script>
 
-<style>
-
-</style>
+<i18n>
+{
+  "en": {
+    "Backpack": "Backpack",
+    "1 meal": "1 meal",
+    "Heal potion": "Heal potion"
+  },
+  "fr": {
+    "1 meal": "1 repas",
+    "Heal potion": "Potion de guérison"
+  }
+}
+</i18n>

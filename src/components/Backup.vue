@@ -1,8 +1,8 @@
 <template>
-<Section title="Notes & Sauvegarde" id="backup">
+<Section :title="$t('Backup and notes')" id="backup">
   <div class="backup-container">
-    <h2>Chapter:</h2>
-    <h2>Notes</h2>
+    <h2>{{$t("Chapter")}}:</h2>
+    <h2>{{$t("Notes")}}</h2>
     <input class="chapter" type="number" v-model.number="chapter"/>
     <textarea v-model.lazy="notes"/>
   </div>
@@ -25,6 +25,21 @@ const Component = Vue.extend({
 
 export default Component;
 </script>
+
+<i18n>
+{
+  "en": {
+    "Backup and notes": "Backup and notes",
+    "Chapter": "Chapter",
+    "Notes": "Notes"
+  },
+  "fr": {
+    "Backup and notes": "Notes & sauvegardes",
+    "Chapter": "Chapitre",
+    "Notes": "Notes"
+  }
+}
+</i18n>
 
 <style>
 .backup-container {

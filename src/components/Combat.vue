@@ -19,10 +19,10 @@
     </div>
     <div class="combat-sheet">
       <h2></h2>
-      <h2>Habileté</h2>
-      <h2>Endurance</h2>
-      <h2>Quotient</h2>
-      <button type="button" v-on:click="fight">Appliquer</button>
+      <h2>{{$t("Combat skill")}}</h2>
+      <h2>{{$t("Endurance")}}</h2>
+      <h2>{{$t("Ratio")}}</h2>
+      <button type="button" v-on:click="fight">{{$t("Round")}}</button>
       <input type="number" v-model.number="enemySkill"/>
       <input type="number" v-model.number="enemyEndurance"/>
       <input type="number" readonly :value="combatSkill - enemySkill"/>
@@ -115,6 +115,21 @@ const Component = Vue.extend({
 
 export default Component;
 </script>
+
+<i18n>
+{
+  "en": {
+    "Ratio": "Ratio",
+    "Skill combat": "Skill combat",
+    "Round": "Fight"
+  },
+  "fr": {
+    "Ratio": "Quotient",
+    "Sill combat": "Habilité",
+    "Round": "Combatre"
+  }
+}
+</i18n>
 
 <style>
 .dice-container {

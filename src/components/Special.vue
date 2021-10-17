@@ -1,5 +1,5 @@
 <template>
-<Section title="Objets spéciaux" id="special">
+<Section :title="$t('Special items')" id="special">
   <textarea class="backpack-text" rows="4" v-model.lazy="specialItems">
   </textarea>
 </Section>
@@ -21,6 +21,18 @@ const Component = Vue.extend({
 
 export default Component;
 </script>
+
+<i18n>
+{
+  "en": {
+    "Special items": "Special items"
+  },
+  "fr": {
+    "Special items": "Objets spéciaux"
+  }
+}
+</i18n>
+
 
 <style>
 .backpack-text {

@@ -1,6 +1,6 @@
 <template>
-<Section title="Bourse" id="pouch">
-  <h2>(50 pièces max.)</h2>
+<Section :title="$t('Pouch')" id="pouch">
+  <h2>{{$t("(max. 50 gold coin)")}}</h2>
   <div class="pouch">
     <img src="pouch.png" height="40px"/>
     <input class="pouch-value" type="number" min="0" max="50" v-model.number="pouch"/>
@@ -28,6 +28,19 @@ const Component = Vue.extend({
 
 export default Component;
 </script>
+
+<i18n>
+{
+  "en": {
+    "Pouch": "Pouch",
+    "(max. 50 gold coin)": "(max. 50 coin)"
+  },
+  "fr": {
+    "Pouch": "Bourse",
+    "(max. 50 gold coin)": "(50 pièces max)"
+  }
+}
+</i18n>
 
 <style>
 .pouch {

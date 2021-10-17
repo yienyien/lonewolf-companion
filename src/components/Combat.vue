@@ -3,7 +3,9 @@
     <div class="live">
       <div class="dice-container" v-on:click="random">
         <div class="dice" v-bind:class="roll">
-          {{ diceValue }}
+          <span>
+            {{ diceValue }}
+          </span>
         </div>
       </div>
       <div class="live-endurance">
@@ -152,14 +154,18 @@ export default Component;
 .dice {
     width: 40px;
     height: 40px;
-    background-color: WhiteSmoke;
-    border: 1px solid;
-    border-radius: 5px;
-    padding: 10px;
+    background-color: white;
+    padding: 0px 10px 20px 10px;
     text-align: center;
     line-height: 40px;
-    font-size: 6em;
+    font-size: 3em;
+    background-image: url("d10-2.svg");
 }
+
+.dice span {
+    color: white;
+}
+
 
 .combat-sheet h2 {
     text-align: center;

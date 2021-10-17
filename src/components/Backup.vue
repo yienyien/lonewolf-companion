@@ -44,7 +44,7 @@ export default Component;
 <style>
 .backup-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 10fr;
     grid-gap: 5px;
     grid-auto-rows: minmax(30px, auto);
 }

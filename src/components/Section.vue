@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 v-on:click="toggle"><span class="monospace">{{ sections[0] ? "+": "-"}}</span> {{title}}</h1>
+    <h1 v-on:click="toggle"><span class="monospace">{{ !sections[id] ? "+": "-"}}</span> {{title}}</h1>
     <div v-if="sections[id]">
       <slot></slot>
     </div>

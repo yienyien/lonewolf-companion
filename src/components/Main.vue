@@ -93,15 +93,21 @@ body {
 }
 
 .container {
+    display: grid;
     padding: 20px;
 }
 
 @media (min-width: 768px) {
     .container {
-        display: grid;
         grid-template-columns: 1fr 1fr;
         grid-auto-rows: auto;
         grid-column-gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
     }
 }
 

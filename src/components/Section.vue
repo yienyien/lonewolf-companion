@@ -1,6 +1,6 @@
 <template>
   <div :style="{order: order[id]}">
-    <h1 @mousedown="dragMouseDown" @mouseup="dragMouseUp" class="noselect" v-on:click="toggle" ><span class="monospace">{{ !sections[id] ? "+": "-"}}</span> {{title}}</h1>
+    <h1 @mousedown="dragMouseDown" @touchstart="dragMouseDown" @touchend="dragMouseUp" @mouseup="dragMouseUp" class="section-title" v-on:click="toggle" ><span class="monospace">{{ !sections[id] ? "+": "-"}}</span> {{title}}</h1>
     <div v-if="sections[id]">
       <slot></slot>
     </div>
@@ -34,7 +34,11 @@ export default Component;
 </script>
 
 <style>
-.noselect {
+.section-title {
     user-select: none;
+}
+
+.section-title:hover {
+    background-color: lightgray;
 }
 </style>

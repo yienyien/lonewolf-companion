@@ -123,11 +123,13 @@ export default Component;
   "en": {
     "Ratio": "Ratio",
     "Combat skill": "Combat skill",
+    "Endurance": "Endurance",
     "Round": "Fight"
   },
   "fr": {
     "Ratio": "Quotient",
     "Combat skill": "Habilité",
+    "Endurance": "Endurance",
     "Round": "Combatre"
   }
 }

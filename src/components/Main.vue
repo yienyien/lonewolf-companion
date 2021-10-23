@@ -52,13 +52,15 @@ const Main = Vue.extend({
   },
 
   async mounted() {
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-    if ('uid' in params) {
-      this.uid = params["uid"];
+    const params = new URLSearchParams(window.location.search);
+
+
+    if (params.get("uid")) {
+      this.uid = params.get("uid");
     } else {
-      const uid = uuidv4()
-      window.location = window.location + "?uid=" + uid;
+      const uid = uuidv4();
+      params.append('uid', uid);
+      window.location.search = params.toString();
     }
     const db = firebase.database();
     this.$store.commit("db", db.ref('users/' + this.uid));

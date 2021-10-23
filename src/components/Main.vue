@@ -32,7 +32,9 @@ import { v4 as uuidv4 } from 'uuid';
 import Backup from "./Backup.vue";
 import Settings from "./Settings.vue";
 
-const Main = Vue.extend({
+import { mapper } from './utils';
+
+const Main = Vue.extend(mapper(["order"], {
   components: {
     Disciplines,
     Weapons,
@@ -43,12 +45,6 @@ const Main = Vue.extend({
     Combat,
     Backup,
     Settings,
-  },
-
-  data() {
-    return {
-      truc: "hello",
-    }
   },
 
   async mounted() {
@@ -65,9 +61,28 @@ const Main = Vue.extend({
     const db = firebase.database();
     this.$store.commit("db", db.ref('users/' + this.uid));
     this.$store.dispatch("load");
+
+    this.$store.subscribe((mutation, state) => {
+      if (mutation.type === "dragSectionTo") {
+        const {dragSectionFrom: from, dragSectionTo: to} = state;
+        if (from !== to) {
+          this.drag(from, to);
+        }
+      }
+    });
   },
 
-});
+  methods: {
+    drag: function(from, to) {
+      const fromOrder = this.order[from];
+      const toOrder = this.order[to];
+
+      Vue.set(this.order, from, toOrder);
+      Vue.set(this.order, to, fromOrder);
+    }
+  }
+
+}));
 
 export default Main;
 </script>
@@ -79,6 +94,15 @@ body {
 
 .container {
     padding: 20px;
+}
+
+@media (min-width: 768px) {
+    .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: auto;
+        grid-column-gap: 20px;
+    }
 }
 
 .list {

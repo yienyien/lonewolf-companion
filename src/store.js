@@ -24,7 +24,20 @@ function newStore() {
     chapter: 0,
     notes: "",
     sections: {},
+    order: {
+      disciplines: 1,
+      weapons: 2,
+      backpack: 3,
+      special: 4,
+      pouch: 5,
+      attributes: 6,
+      combat: 7,
+      backup: 8,
+      options: 9,
+    },
     lang: "en",
+    dragSectionFrom: null,
+    dragSectionTo: null,
   };
 
   function getSetters() {
@@ -32,7 +45,7 @@ function newStore() {
     Object.keys(state).forEach((key) => {
       setters[key] = (state, v, notSave) => {
         state[key] = v;
-        if (key !== "db" && !notSave) {
+        if (key !== "db" && !key.startsWith("drag") && !notSave) {
           save(state);
         }
       };

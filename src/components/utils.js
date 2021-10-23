@@ -33,6 +33,8 @@ function mapper(states, Component) {
         sup && sup(v);
       },
     };
+
+    Component.watch = watch;
   });
 
   return Component;

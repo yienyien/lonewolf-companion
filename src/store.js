@@ -44,7 +44,7 @@ function newStore() {
     lang: "en",
     dragSectionFrom: null,
     dragSectionTo: null,
-    backup: [],
+    backup: {},
   };
 
   function getSetters() {

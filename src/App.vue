@@ -37,7 +37,6 @@ export default {
       this.height = height;
     },
     beforeWindowUnload: () => {
-      console.log(event);
       return (event.returnValue = "Foobar");
     },
   },

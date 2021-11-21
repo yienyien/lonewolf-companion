@@ -1,10 +1,16 @@
 import Vuex from "vuex";
+import Vue from "vue";
 
-function save(state) {
+function save(state, snapshotId) {
   if (!state.db) return;
   const s = { ...state };
   delete s["db"];
-  state.db.update(s);
+  delete s["backup"];
+  let ref = state.db;
+  if (snapshotId) {
+    ref = ref.child(`backup/${snapshotId}`);
+  }
+  ref.update(s);
 }
 
 function newStore() {
@@ -38,6 +44,7 @@ function newStore() {
     lang: "en",
     dragSectionFrom: null,
     dragSectionTo: null,
+    backup: [],
   };
 
   function getSetters() {
@@ -67,11 +74,28 @@ function newStore() {
         }
         save(state);
       },
+      doBackup(state) {
+        const ts = new Date().getTime();
+        save(state, ts);
+        const bstate = { ...state };
+        delete bstate["backup"];
+        Vue.set(state.backup, ts, bstate);
+      },
+      delBackup(state, snapshotId) {
+        Vue.delete(state.backup, snapshotId);
+        console.log("ici");
+        state.db.child(`backup/${snapshotId}`).remove();
+      },
     },
     actions: {
-      load({ commit, state }) {
+      load({ commit, state }, snapshotId) {
         if (state.db) {
-          state.db.once("value").then((snap) => {
+          let ref = state.db;
+          if (snapshotId) {
+            ref = ref.child(`backup/${snapshotId}`);
+          }
+
+          ref.once("value").then((snap) => {
             const val = snap.val();
             if (val) {
               Object.entries(val).forEach(([key, value]) => {
@@ -80,9 +104,6 @@ function newStore() {
             }
           });
         }
-      },
-      force({ state }) {
-        save(state);
       },
     },
   });

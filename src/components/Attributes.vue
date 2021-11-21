@@ -1,16 +1,16 @@
 <template>
-<Section title="Attributs" id="attributes">
-  <div class="attributes">
-    <div class="attribute">
-      <h2 >{{$t("Combat skill")}}</h2>
-      <input type="number" v-model.number="combatSkill"/>
+  <Section title="Attributs" id="attributes">
+    <div class="attributes">
+      <div class="attribute">
+        <h2>{{ $t("Combat skill") }}</h2>
+        <input type="number" v-model.number="combatSkill" />
+      </div>
+      <div class="attribute">
+        <h2>{{ $t("Endurance") }}</h2>
+        <input type="number" v-model.number="endurance" />
+      </div>
     </div>
-    <div class="attribute">
-      <h2 >{{$t("Endurance")}}</h2>
-      <input type="number" v-model.number="endurance"/>
-    </div>
-  </div>
-</Section>
+  </Section>
 </template>
 
 <script>
@@ -24,7 +24,6 @@ const Component = Vue.extend({
   },
 
   computed: mapStates("combatSkill", "endurance"),
-
 });
 
 export default Component;
@@ -44,27 +43,26 @@ export default Component;
 </i18n>
 
 <style>
-
 .attribute input {
-    outline: none;
-    border: 0;
-    width: 30px;
-    height: 40px;
-    font-size: 20px;
+  outline: none;
+  border: 0;
+  width: 30px;
+  height: 40px;
+  font-size: 20px;
 }
 
 .attribute div {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .attribute {
-    text-align: center;
-    border: 1px solid;
+  text-align: center;
+  border: 1px solid;
 }
 .attributes {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 5px;
-    grid-auto-rows: minmax(40px, auto);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5px;
+  grid-auto-rows: minmax(40px, auto);
 }
 </style>

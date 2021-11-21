@@ -1,8 +1,8 @@
 <template>
-<Section :title="$t('Special items')" id="special">
-  <textarea class="backpack-text" rows="4" v-model.lazy="specialItems">
-  </textarea>
-</Section>
+  <Section :title="$t('Special items')" id="special">
+    <textarea class="backpack-text" rows="4" v-model.lazy="specialItems">
+    </textarea>
+  </Section>
 </template>
 
 <script>
@@ -16,7 +16,6 @@ const Component = Vue.extend({
   },
 
   computed: mapStates("specialItems"),
-
 });
 
 export default Component;
@@ -33,9 +32,8 @@ export default Component;
 }
 </i18n>
 
-
 <style>
 .backpack-text {
-    width: 100%;
+  width: 100%;
 }
 </style>

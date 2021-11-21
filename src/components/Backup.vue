@@ -1,12 +1,12 @@
 <template>
-<Section :title="$t('Backup and notes')" id="backup">
-  <div class="backup-container">
-    <h2>{{$t("Chapter")}}:</h2>
-    <h2>{{$t("Notes")}}</h2>
-    <input class="chapter" type="number" v-model.number="chapter"/>
-    <textarea v-model.lazy="notes"/>
-  </div>
-</Section>
+  <Section :title="$t('Backup and notes')" id="backup">
+    <div class="backup-container">
+      <h2>{{ $t("Chapter") }}:</h2>
+      <h2>{{ $t("Notes") }}</h2>
+      <input class="chapter" type="number" v-model.number="chapter" />
+      <textarea v-model.lazy="notes" />
+    </div>
+  </Section>
 </template>
 
 <script>
@@ -20,7 +20,6 @@ const Component = Vue.extend({
   },
 
   computed: mapStates("chapter", "notes"),
-
 });
 
 export default Component;
@@ -43,19 +42,18 @@ export default Component;
 
 <style>
 .backup-container {
-    display: grid;
-    grid-template-columns: 1fr 10fr;
-    grid-gap: 5px;
-    grid-auto-rows: minmax(30px, auto);
+  display: grid;
+  grid-template-columns: 1fr 10fr;
+  grid-gap: 5px;
+  grid-auto-rows: minmax(30px, auto);
 }
 
 .chapter {
-    text-align: center;
+  text-align: center;
 }
 
-
 .backup-container input {
-    width: 100%;
-    height: 40px;
+  width: 100%;
+  height: 40px;
 }
 </style>

@@ -23,7 +23,6 @@ firebase.initializeApp(firebaseConfig);
 
 Vue.config.productionTip = false;
 
-
 Vue.use(Vuex);
 Vue.use(VueResizeObserver);
 

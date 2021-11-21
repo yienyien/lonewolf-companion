@@ -1,18 +1,16 @@
 <template>
   <div id="app">
-    <Main v-resize="onResize"/>
-    <Background :height="height"/>
+    <Main v-resize="onResize" />
+    <Background :height="height" />
   </div>
 </template>
 
 <script>
-import Main from './components/Main.vue'
-import Background from './components/Background.vue'
-
-
+import Main from "./components/Main.vue";
+import Background from "./components/Background.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Main,
     Background,
@@ -46,9 +44,8 @@ export default {
 };
 </script>
 
-
 <style>
 html {
-    padding: 0;
+  padding: 0;
 }
 </style>

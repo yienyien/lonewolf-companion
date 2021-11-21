@@ -1,68 +1,77 @@
 <template>
-<Section :title="$t('disciplines')" id="disciplines">
-  <div v-for="index in size" :key="index" class="list">
-    <span class="index">{{index}}</span>
+  <Section :title="$t('disciplines')" id="disciplines">
+    <div v-for="index in size" :key="index" class="list">
+      <span class="index">{{ index }}</span>
 
-    <select class="discipline" v-model="disciplines[index-1]">
-      <option></option>
-      <option v-for="discipline in disciplineNames" :key="discipline" :value="discipline">
-        {{$t(discipline)}}
-      </option>
-    </select>
-  </div>
-  <div class="center">
-    <button class="w80" type="button" v-on:click="ndisciplines+=1">+</button>
-  </div>
-</Section>
+      <select class="discipline" v-model="disciplines[index - 1]">
+        <option></option>
+        <option
+          v-for="discipline in disciplineNames"
+          :key="discipline"
+          :value="discipline"
+        >
+          {{ $t(discipline) }}
+        </option>
+      </select>
+    </div>
+    <div class="center">
+      <button class="w80" type="button" v-on:click="ndisciplines += 1">
+        +
+      </button>
+    </div>
+  </Section>
 </template>
 
 <script>
 import Vue from "vue";
-import { mapper } from './utils';
+import { mapper } from "./utils";
 import Section from "./Section.vue";
 
-const Component = Vue.extend(mapper(["disciplines"], {
-  components: {
-    Section,
-  },
+const Component = Vue.extend(
+  mapper(["disciplines"], {
+    components: {
+      Section,
+    },
 
-  created() {
-    this.disciplineNames = [
-      "camouflage",
-      "hunting",
-      "sixthsense",
-      "tracking",
-      "healing",
-      "weaponskill-0",
-      "weaponskill-1",
-      "weaponskill-2",
-      "weaponskill-3",
-      "weaponskill-4",
-      "weaponskill-5",
-      "weaponskill-6",
-      "weaponskill-7",
-      "weaponskill-8",
-      "weaponskill-9",
-      "mindshield",
-      "mindblast",
-      "animalkinship",
-      "mindovermatter"
-    ];
-  },
-  
-  data() {
-    return {
-      ndisciplines: 0,
-    }
-  },
+    created() {
+      this.disciplineNames = [
+        "camouflage",
+        "hunting",
+        "sixthsense",
+        "tracking",
+        "healing",
+        "weaponskill-0",
+        "weaponskill-1",
+        "weaponskill-2",
+        "weaponskill-3",
+        "weaponskill-4",
+        "weaponskill-5",
+        "weaponskill-6",
+        "weaponskill-7",
+        "weaponskill-8",
+        "weaponskill-9",
+        "mindshield",
+        "mindblast",
+        "animalkinship",
+        "mindovermatter",
+      ];
+    },
 
-  computed: {
-    size: function() {
-      const s = Math.max(...Object.keys(this.disciplines)) + 1 + this.ndisciplines;
-      return s;
-    }
-  },
-}));
+    data() {
+      return {
+        ndisciplines: 0,
+      };
+    },
+
+    computed: {
+      size: function () {
+        const s =
+          Math.max(...Object.keys(this.disciplines)) + 1 + this.ndisciplines;
+        return s;
+      },
+    },
+  })
+);
 
 export default Component;
 </script>
@@ -118,7 +127,7 @@ export default Component;
 
 <style>
 .discipline {
-    width: 100%
+  width: 100%;
 }
 
 .center {
@@ -126,5 +135,4 @@ export default Component;
   justify-content: center;
   align-items: center;
 }
-
 </style>

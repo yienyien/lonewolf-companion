@@ -111,7 +111,7 @@ body {
 
 .list {
   display: grid;
-  grid-template-columns: 10px auto 20px;
+  grid-template-columns: 10px auto 20px 20px;
   grid-gap: 5px;
   grid-auto-rows: auto;
 }

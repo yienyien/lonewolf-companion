@@ -6,6 +6,7 @@
       <select v-model="propositions[index]">
         <option v-for="w in weaponList" :value="w" :key="w">{{ $t(w) }}</option>
       </select>
+      <button @click="remove(index)">x</button>
     </div>
   </Section>
 </template>
@@ -60,6 +61,15 @@ const Component = Vue.extend(
       return {
         propositions: [null, null],
       };
+    },
+
+    methods: {
+      remove: function (index) {
+        if (index > 0) {
+          Vue.set(this.weapons, index, null);
+          Vue.set(this.propositions, index, null);
+        }
+      },
     },
 
     watch: {

@@ -7,6 +7,7 @@
         <option :value="$t('1 meal')">{{ $t("1 meal") }}</option>
         <option :value="$t('Heal potion')">{{ $t("Heal potion") }}</option>
       </select>
+      <button @click="remove(index)">x</button>
     </div>
   </Section>
 </template>
@@ -26,6 +27,15 @@ const Component = Vue.extend(
       return {
         items: [null, null, null, null, null, null, null, null],
       };
+    },
+
+    methods: {
+      remove: function (index) {
+        if (index > 0) {
+          Vue.set(this.backpack, index, null);
+          Vue.set(this.items, index, null);
+        }
+      },
     },
 
     watch: {

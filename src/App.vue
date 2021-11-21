@@ -22,16 +22,28 @@ export default {
       height: 0,
     };
   },
+
+  created: function () {
+    window.addEventListener("beforeunload", this.beforeWindowUnload);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("beforeunload", this.beforeWindowUnload);
+  },
+
   mounted() {
     this.height = 0;
   },
   methods: {
-    onResize({height}) {
+    onResize({ height }) {
       this.height = height;
-    }
-  }
-
-}
+    },
+    beforeWindowUnload: () => {
+      console.log(event);
+      return (event.returnValue = "Foobar");
+    },
+  },
+};
 </script>
 
 

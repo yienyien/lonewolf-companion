@@ -81,6 +81,9 @@ function newStore() {
           });
         }
       },
+      force({ state }) {
+        save(state);
+      },
     },
   });
 }

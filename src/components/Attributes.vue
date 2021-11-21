@@ -46,7 +46,7 @@ export default Component;
 .attribute input {
   outline: none;
   border: 0;
-  width: 30px;
+  width: 40px;
   height: 40px;
   font-size: 20px;
 }

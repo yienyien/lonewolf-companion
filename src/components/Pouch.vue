@@ -12,8 +12,12 @@
       />
       <button type="button" v-on:click="pouch += 1">+1</button>
       <button type="button" v-on:click="pouch += 5">+5</button>
-      <button type="button" v-on:click="pouch -= 1">-1</button>
-      <button type="button" v-on:click="pouch -= 5">-5</button>
+      <button type="button" v-on:click="pouch = Math.max(pouch - 1, 0)">
+        -1
+      </button>
+      <button type="button" v-on:click="pouch = Math.max(pouch - 5, 0)">
+        -5
+      </button>
     </div>
   </Section>
 </template>

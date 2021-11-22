@@ -1,11 +1,14 @@
 import Vuex from "vuex";
 import Vue from "vue";
 
+const NOT_SAVED = ["db", "backup"];
+
 function save(state, snapshotId) {
   if (!state.db) return;
   const s = { ...state };
-  delete s["db"];
-  delete s["backup"];
+  NOT_SAVED.forEach((entry) => {
+    delete s[entry];
+  });
   let ref = state.db;
   if (snapshotId) {
     ref = ref.child(`backup/${snapshotId}`);
@@ -17,7 +20,9 @@ function newStore() {
   const state = {
     db: null,
     combatSkill: 0,
+    combatSkillModificator: 0,
     endurance: 0,
+    enduranceModificator: 0,
     disciplines: [null, null, null, null, null],
     wounds: 0,
     backpack: [null, null, null, null, null, null, null, null],
@@ -67,8 +72,8 @@ function newStore() {
       ...getSetters(),
       addWounds(state, value) {
         state.wounds = state.wounds + value;
-        if (state.wounds > state.endurance) {
-          state.wounds = state.endurance;
+        if (state.wounds >= state.endurance + state.enduranceModificator) {
+          state.wounds = state.endurance + state.enduranceModificator;
         } else if (state.wounds < 0) {
           state.wounds = 0;
         }

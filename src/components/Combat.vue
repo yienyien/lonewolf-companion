@@ -13,7 +13,7 @@
           <img class="live-endurance-icon" src="life.png" v-bind:class="beat" />
         </div>
         <div class="live-endurance-value">
-          {{ endurance - wounds }}
+          {{ endurance + enduranceModificator - wounds }}
         </div>
         <div>
           <button
@@ -41,7 +41,11 @@
       <button type="button" v-on:click="fight">{{ $t("Round") }}</button>
       <input type="number" v-model.number="enemySkill" />
       <input type="number" v-model.number="enemyEndurance" />
-      <input type="number" readonly :value="combatSkill - enemySkill" />
+      <input
+        type="number"
+        readonly
+        :value="combatSkill + combatSkillModificator - enemySkill"
+      />
     </div>
   </Section>
 </template>
@@ -244,8 +248,10 @@ const Component = Vue.extend({
     "enemySkill",
     "enemyEndurance",
     "combatSkill",
+    "combatSkillModificator",
     "wounds",
-    "endurance"
+    "endurance",
+    "enduranceModificator"
   ),
 
   methods: {
@@ -268,10 +274,10 @@ const Component = Vue.extend({
     },
     fight: function () {
       const [enemyWounds, wounds] = resolution(
-        this.combatSkill - this.enemySkill,
+        this.combatSkill + this.combatSkillModificator - this.enemySkill,
         this.diceValue
       );
-      this.enemyEndurance -= enemyWounds;
+      this.enemyEndurance = Math.max(0, this.enemyEndurance - enemyWounds);
       this.addWounds(wounds);
     },
   },

@@ -1,5 +1,7 @@
 # Lonewolf componanion
 
+Live: https://lonewolf.yienyien.net/
+
 ## Project setup
 ```
 yarn install
